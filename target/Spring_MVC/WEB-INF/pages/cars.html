@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmln="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Users</title>
+</head>
+<body>
+<tbody class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="row">Model</th>
+        <th scope="row">Series</th>
+        <th scope="row">Condition</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th: each="cars: ${countCar}">
+        <td th: text="${cars.name}"/>
+        <td th: text="${cars.series}"/>
+        <td th: text="${cars.condition}"/>
+
+
+    </tr>
+    </tbody>
+    </table>
+
+
+</body>
+</html>
