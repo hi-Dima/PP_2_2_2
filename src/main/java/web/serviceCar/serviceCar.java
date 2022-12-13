@@ -1,5 +1,6 @@
 package web.serviceCar;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.dao.daoCar;
 import web.modelCar.Car;
@@ -7,45 +8,36 @@ import web.modelCar.Car;
 import java.util.ArrayList;
 import java.util.List;
 @Service
-public class serviceCar {
-    private daoCar car;
+public class serviceCar implements serviceCarImpl {
 
-    public serviceCar(daoCar car) {
-        this.car = car;
+    private final daoCar daoCar;
+    public serviceCar(daoCar daoCar) {
+        this.daoCar = daoCar;
     }
 
-    public List<Car> viewCars(int count){
-        List<Car> car = new ArrayList<>();
-        if (count == 5) {
-            car = new daoCar().listOf5Cars();
-            return car;
-        }
-        if (count == 4) {
-            for (int i = 0; i < 4; i++) {
-                car.add(new daoCar().listOf5Cars().get(i));
-            }
-            return car;
-        }
-        if (count == 3) {
-            for (int i = 0; i < 3; i++) {
-                car.add(new daoCar().listOf5Cars().get(i));
-            }
-            return car;
-        }
-        if (count == 2) {
-            for (int i = 0; i < 2; i++) {
-                car.add(new daoCar().listOf5Cars().get(i));
-            }
-            return  car;
-        }
-        if (count == 1) {
-            car.add(new daoCar().listOf5Cars().get(0));
-            return  car;
-        }
-        if (count > 5) {
-            car = new daoCar().listOf5Cars();
-            return  car;
-        }
-        return null;
+
+    @Override
+    public List<Car> getOneCar() {
+        return daoCar.viewCars(1) ;
+    }
+
+    @Override
+    public List<Car> getTwoCar() {
+        return daoCar.viewCars(2);
+    }
+
+    @Override
+    public List<Car> getThreeCar() {
+        return daoCar.viewCars(3);
+    }
+
+    @Override
+    public List<Car> getFourCar() {
+        return daoCar.viewCars(4);
+    }
+
+    @Override
+    public List<Car> getAllCar() {
+        return daoCar.viewCars(5);
     }
 }

@@ -1,30 +1,24 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
- xmln="https://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Update Users</title>
+    <meta charset="UTF-8" />
 </head>
 <body>
-<tbody class="table table-dark">
-    <thead>
+<h1>Table "Cars"</h1>
+<table border="1", bgcolor="#ff7f50">
     <tr>
-        <th scope="row">Model</th>
-        <th scope="row">Series</th>
-        <th scope="row">Condition</th>
+        <th> </th>
+        <th>Model</th>
+        <th>Series</th>
+        <th>Condition</th>
     </tr>
-    </thead>
-    <tbody>
-    <tr th: each="cars: ${countCar}">
-        <td th: text="${cars.name}"/>
-        <td th: text="${cars.series}"/>
-        <td th: text="${cars.condition}"/>
-
-
+    <tr th:each="mapItem,state : ${countCar}"
+        class="row" th:classappend="${state.odd} ? 'odd-row' : 'even-row'">
+        <td th:utext="${state.count}">count</td>
+        <td th:utext="${mapItem.model}">Model</td>
+        <td th:utext="${mapItem.series}">Series</td>
+        <td th:utext="${mapItem.condition}">Condition</td>
     </tr>
-    </tbody>
-    </table>
-
-
+</table>
 </body>
 </html>

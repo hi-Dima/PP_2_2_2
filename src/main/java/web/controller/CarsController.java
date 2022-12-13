@@ -2,6 +2,8 @@ package web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import web.modelCar.Car;
 import web.serviceCar.serviceCar;
 
@@ -10,36 +12,38 @@ import java.util.List;
 
 @Controller
 public class CarsController {
-    private List <Car> countCar;
-    private serviceCar serviceCar;
+    private List<Car> countCar;
+    private final serviceCar serviceCar;
 
-    public CarsController(List<Car> countCar, web.serviceCar.serviceCar serviceCar) {
-        this.countCar = countCar;
+    public CarsController(serviceCar serviceCar) {
         this.serviceCar = serviceCar;
     }
 
     @GetMapping(value = "/cars")
-    public String printAllCars(ModelMap model) {
-        countCar = serviceCar.viewCars(5);
-        model.addAttribute("countCar", countCar);
-        return "cars";
-    }
-    @GetMapping(value = "/cars?count=2")
-    public String printTwoCars(ModelMap model) {
-        countCar = serviceCar.viewCars(2);
-        model.addAttribute("countCar", countCar);
-        return "cars";
-    }
-
-    @GetMapping(value = "/cars?count=3")
-    public String printThreeCars(ModelMap model) {
-        countCar = serviceCar.viewCars(3);
-        model.addAttribute("countCar", countCar);
-        return "cars";
-    }
-    @GetMapping(value = "/cars?count=4")
-    public String printFourCars(ModelMap model) {
-        countCar = serviceCar.viewCars(4);
+    public String printAllCars(ModelMap model,
+                               @RequestParam("count") int count) {
+        if (count > 0) {
+            if (count == 5) {
+                countCar = serviceCar.getAllCar();
+            }
+            if (count == 4) {
+                countCar = serviceCar.getFourCar();
+            }
+            if (count == 3) {
+                countCar = serviceCar.getThreeCar();
+            }
+            if (count == 2) {
+                countCar = serviceCar.getTwoCar();
+            }
+            if (count == 1) {
+                countCar = serviceCar.getOneCar();
+            }
+            if (count > 5) {
+                countCar = serviceCar.getAllCar();
+            }
+        } else {
+            countCar = null;
+        }
         model.addAttribute("countCar", countCar);
         return "cars";
     }
