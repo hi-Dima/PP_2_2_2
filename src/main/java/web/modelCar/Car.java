@@ -1,10 +1,4 @@
 package web.modelCar;
-
-import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 public class Car {
     private String model;
     private int series;
@@ -48,6 +42,5 @@ public class Car {
     public void setCondition(String condition) {
         this.condition = condition;
     }
-
 
 }
